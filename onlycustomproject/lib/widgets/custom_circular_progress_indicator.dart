@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:onlycustomproject/widgets/sized_box_widget.dart';
 
-class CustomCircularProgressIndidator extends StatefulWidget {
-  const CustomCircularProgressIndidator({super.key});
-
-  @override
-  State<CustomCircularProgressIndidator> createState() =>
-      _CustomCircularProgressIndidatorState();
-}
-
-class _CustomCircularProgressIndidatorState
-    extends State<CustomCircularProgressIndidator> {
+class CircularProgressIndicatorWidget extends StatelessWidget {
+  const CircularProgressIndicatorWidget(
+      {super.key,
+      this.context,
+      this.size = 10,
+      this.strokeWidth = 2,
+      this.color,
+      this.alignment});
+  final BuildContext? context;
+  final double size;
+  final double strokeWidth;
+  final Color? color;
+  final AlignmentGeometry? alignment;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 15.h,
-      width: 15.w,
-      child: const CircularProgressIndicator(
-        strokeWidth: 2,
-        backgroundColor: Colors.black26,
-        valueColor: AlwaysStoppedAnimation<Color>(
-          Colors.white, //<-- SEE HERE
+    return Align(
+      alignment: alignment ?? Alignment.center,
+      child: SizedBoxWidget(
+        width: size,
+        height: size,
+        child: CircularProgressIndicator(
+          strokeWidth: strokeWidth,
+          valueColor: AlwaysStoppedAnimation<Color>(
+              color ?? Theme.of(context).primaryColor),
         ),
       ),
     );
